@@ -1,0 +1,47 @@
+# Sir Tife Health Analysis — AI-Powered Healthcare Administrative Assistant
+
+**[Live demo →](https://sirtifedatanalysis.netlify.app/)**
+
+> **⚠️ Prototype disclaimer:** This is a demonstration system built to showcase safe AI system design for healthcare administration. The clinic name, provider names, schedules, drug inventory figures, and contact details are entirely fictional. No real patient, provider, or facility data is used anywhere in this project.
+
+## What It Is
+
+Sir Tife Health Analysis is a conversational AI assistant designed to handle the administrative layer of a hospital front desk — appointment scheduling, surgical theater coordination, pharmacy stock checks, and patient-facing FAQs — while enforcing a strict, non-negotiable boundary: **it never gives medical advice, and it never lets a red-flag symptom pass through undetected.**
+
+The project's real subject isn't the chatbot's conversational polish. It's the **constraint architecture around it** — the rules that decide what the AI is allowed to say, when it must stop talking and hand off to a human, and how it stays useful without ever overstepping into clinical territory.
+
+## Core Functional Modules
+
+**Appointment & Provider Scheduling**
+Maps patient requests against a structured provider availability matrix (specialty, day, time window) to prevent the single most common source of patient frustration: showing up to a facility with no one available to see them.
+
+**Surgical Theater Coordination**
+Tracks operating theater allocation by procedure type and day, and triggers automated SMS/voice rescheduling alerts when emergency overrides or case extensions shift the timeline — so patients aren't left finding out about a delay by walking into an empty waiting room.
+
+**Pharmacy Inventory Verification**
+Checks live-style dispensary stock before a patient travels for a prescription, flags low-stock items for mandatory pharmacist review, and routes out-of-stock medications to partner pharmacies instead of a dead end.
+
+**Clinical Safety & Red-Flag Escalation**
+The most important module. Every symptom mention is checked against defined high-risk categories — cardiovascular/respiratory, neurological/stroke (FAST criteria), diabetic complications, trauma/wounds, and vulnerable-population flags (infants, pregnancy). A single match halts the automated flow immediately and routes to human clinical staff — no further AI-generated conversation continues past that point.
+
+## Design Principles
+
+- **The AI proposes scheduling and administrative logic; it never proposes clinical judgment.** Diagnosis, treatment advice, and symptom severity assessment are explicitly out of scope, with a scripted, consistent refusal-and-redirect response.
+- **Silence is safer than a wrong clinical answer.** Ambiguous or borderline symptom mentions default to escalation, not reassurance.
+- **Every red flag overrides everything else in the conversation.** Scheduling, FAQs, and pharmacy checks all stop the moment a red-flag symptom is detected.
+- **Privacy by design.** No unnecessary sensitive data collection (e.g., full SSNs), role-based access framing, and a published privacy policy covering data use, retention, and patient rights.
+
+See [`docs/01_technical_operational_playbook.md`](docs/01_technical_operational_playbook.md) for the full system specification, [`docs/02_privacy_policy.md`](docs/02_privacy_policy.md) for the data handling policy, and [`docs/03_practice_faq.md`](docs/03_practice_faq.md) for the patient-facing scope FAQ.
+
+## Methodology & Training Foundation
+
+The safety architecture here — scope boundaries, escalation triggers, disclaimer requirements, and red-flag detection patterns — was developed applying principles from IBM SkillsBuild's chatbot safety and healthcare AI curriculum. That coursework (including a separate red-flag triage exercise) lives in [`healthcare-ai-informatics-portfolio`](https://github.com/AbioyeStephen/healthcare-ai-informatics-portfolio) — this repo is the applied, deployed extension of those same principles into a full administrative system design.
+
+## What I'd Improve Next
+
+- Wire the red-flag detection into a real RAG pipeline against a verified knowledge base, rather than static rule matching
+- Add authenticated patient-portal linking with proper identity-matching fallback logic
+- Build out the metrics layer (containment rate, escalation rate, time saved) described in the safety framework, so the system's real-world performance would be measurable, not just designed-for
+
+---
+Built by [Stephen](https://github.com/AbioyeStephen) · AI Automation Engineer · applying safety-critical system design to conversational AI
